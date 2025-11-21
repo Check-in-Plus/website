@@ -4,35 +4,39 @@ import { Resend } from 'resend'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(req: Request) {
-  if (!process.env.RESEND_FROM) {
-    return NextResponse.json(
-      { error: "RESEND_FROM is not configured in the environment variables." },
-      { status: 500 }
-    )
-  }
   try {
-    const { name, email, message } = await req.json()
+    const { email } = await req.json()
 
-    if (!name || !email || !message) {
+    if (!email) {
       return NextResponse.json(
-        { error: "Missing required fields." },
+        { error: "E-mail é obrigatório." },
         { status: 400 }
       )
     }
 
-    const data = await resend.emails.send({
-      from: `Edge ETZ <${process.env.RESEND_FROM}>`,
-      to: [process.env.RESEND_FROM],
+
+    await resend.emails.send({
+      from: `Check-in Plus <${process.env.RESEND_FROM}>`,
+      to: process.env.RESEND_FROM!,
       replyTo: email,
-      subject: `Contact from: ${name}`,
-      text: message,
+      subject: `Novo inscrito na newsletter`,
+      text: `Novo e-mail cadastrado: ${email}`,
     })
 
-    return NextResponse.json({ success: true, data })
+
+    await resend.emails.send({
+      from: `Check-in Plus <${process.env.RESEND_FROM}>`,
+      to: email,
+      subject: "Bem-vindo à nossa Newsletter!",
+      text: `Obrigado por se inscrever na Check-in Plus! Em breve você receberá novidades.`,
+    })
+
+    return NextResponse.json({ success: true })
+
   } catch (error) {
-    console.error("Email sending error:", error)
+    console.error('Erro ao enviar e-mails:', error)
     return NextResponse.json(
-      { error: "Internal server error while sending email." },
+      { error: "Erro interno ao enviar e-mails." },
       { status: 500 }
     )
   }
