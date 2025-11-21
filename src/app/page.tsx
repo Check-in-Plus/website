@@ -1,66 +1,53 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-
-export default function Home() {
+export default function ComingSoonPage() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-600 via-blue-600 to-indigo-800 text-white px-6">
+      {/* Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent_70%)] pointer-events-none" />
+
+      <div className="relative z-10 text-center max-w-xl">
+
+        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-md">
+          Estamos Construindo Algo Incrível
+        </h1>
+
+        <p className="mt-4 text-lg md:text-xl text-blue-100">
+          Nosso novo sistema está quase pronto!
+          Em breve você poderá acessar uma experiência moderna,
+          rápida e totalmente integrada.
+        </p>
+
+        <div className="mt-10">
+          <div className="animate-pulse inline-flex items-center gap-2 bg-white/10 border border-white/20 px-6 py-3 rounded-2xl backdrop-blur-md">
+            <div className="w-3 h-3 rounded-full bg-emerald-400 animate-bounce"></div>
+            <span className="text-white">Em desenvolvimento…</span>
+          </div>
+        </div>
+
+        {/* Optional – notify area */}
+        <div className="mt-12 p-6 bg-white/10 border border-white/20 rounded-2xl backdrop-blur-md shadow-lg">
+          <p className="text-blue-100 mb-3 font-medium">
+            Quer ser avisado quando for lançado?
           </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+          <form className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              placeholder="Seu melhor e-mail"
+              className="flex-1 px-4 py-3 rounded-lg bg-white/20 placeholder-white/60 text-white outline-none focus:ring-2 focus:ring-emerald-400"
             />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <button
+              type="submit"
+              className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 rounded-lg font-semibold shadow-md transition"
+            >
+              Notificar-me
+            </button>
+          </form>
         </div>
-      </main>
+      </div>
+
+      <footer className="absolute bottom-6 text-blue-100 text-sm opacity-80">
+        © {new Date().getFullYear()} CheckinPlus — Todos os direitos reservados.
+      </footer>
     </div>
-  );
+  )
 }
